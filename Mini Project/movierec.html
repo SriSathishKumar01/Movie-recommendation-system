@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie Recommendation</title>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <style>
+      
+      body {
+  background-color: black;
+  color: white;
+}
+
+
+body {
+            margin: 0;
+            font-family: 'Raleway', sans-serif;
+            background-color: #1c1c1c;
+            color: #fff;
+        }
+        body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+
+.search-bar {
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    margin-left: 850px;
+   
+
+}
+
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('goodfilms.jpg') no-repeat center center;
+            background-size: cover;
+            color: white;
+            position: relative;
+            height: 100px;
+            padding-bottom: 100px;
+            height: 200px;
+        }
+
+        .header h1 {
+            font-size: 4em;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .header p {
+            font-size: 1.5em;
+            margin: 20px 0 0;
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+        }
+
+
+
+
+/* styles.css */
+
+.search-button {
+  background-color: rgb(158, 62, 248);
+  padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+          
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+}
+.search-button::before{
+  content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: skewX(30deg);
+            transition: all 0.5s ease;
+}
+.search-button::before {
+            left: 100%;
+        }
+
+        .search-button:hover {
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .search-button:active {
+            transform: translateY(0);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+.movies {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+
+.movies li {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  background-color: black;
+}
+
+.movies li img {
+  max-width: 300px;
+  border-radius: 12px;
+
+}
+
+.movies li h2 {
+  color: white;
+  font-size: 1.8em;
+  padding: 15px 10px 0;
+  margin-top: auto;
+  font-family: "Oswald", sans-serif;
+}
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+  padding: 20px;
+}
+
+.movie-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.movie-details h2 {
+  margin-bottom: 5px;
+}
+
+.movie-details p {
+  margin: 0;
+}
+
+.movie-details img {
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+.random-bt{
+  padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: rgb(158, 62, 248);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+}
+.random-bt::before{
+  content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: skewX(30deg);
+            transition: all 0.5s ease;
+}
+.random-bt::before {
+            left: 100%;
+        }
+
+        .random-bt:hover {
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .random-bt:active {
+            transform: translateY(0);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .favorite-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+}
+/* styles.css */
+/* styles.css */
+.favorite-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+}
+
+.favorite-button svg {
+    width: 48px;
+    height: 48px;
+    position: relative;
+    position: absolute;
+  
+  transform: translateY(-70%);
+    transition: transform 0.3s ease, fill 0.3s ease;
+    fill: transparent;
+    stroke: #fff;
+    stroke-width: 2;
+}
+
+.favorite-button:hover svg {
+    transform: scale(1.2);
+    animation: heartBeat 1s infinite;
+}
+
+.favorite-button:active svg {
+    fill: #ff0000;
+    stroke: #ff0000;
+}
+
+@keyframes heartBeat {
+    0%, 20%, 40%, 60%, 80%, 100% {
+        transform: scale(1);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: scale(1.1);
+    }
+}
+
+
+
+
+    </style>
+    <div class="all">
+      <h1 class="header">
+
+    </div>
+    
+    <input type="text" id="movie-title" class="search-bar" placeholder="Search Here..." size="500">
+    <button onclick="searchMovie()" class="search-button">Search</button>
+    <button onclick=" location.reload();" class="random-bt">Random</button>
+    <button onclick="event.preventDefault(); 
+    window.location.href = 'favourshow.html';"class="favorite-button">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="feather feather-heart">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+      </svg>
+  </button>
+    <div class="results"></div>
+    
+    <script src="movierec.js"></script>
+
+  </body>
+</html>

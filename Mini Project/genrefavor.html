@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #74EBD5 0%, #9FACE6 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 80%;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .grid-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+        }
+
+        .grid-item:hover {
+            transform: scale(1.05);
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: auto;
+        }
+
+        .grid-item label {
+            display: block;
+            padding: 0.5rem;
+            background: #74EBD5;
+            color: white;
+            text-align: center;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .grid-item input {
+            display: none;
+        }
+
+        .grid-item input:checked + label {
+            background: #333;
+        }
+
+        button {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            border: none;
+            background: #333;
+            color: white;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #555;
+        }
+
+        .description-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 1rem;
+            width: 80%;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #333;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Select Genres for Movie Recommendation</h1>
+        <div class="grid">
+            <div class="grid-item">
+                <input type="checkbox" id="action" name="genre" value="Action">
+                <label for="action">
+                    <img src="action.jpg" alt="Action">
+                    Action
+                </label>
+            </div>
+            <div class="grid-item">
+                <input type="checkbox" id="comedy" name="genre" value="Comedy">
+                <label for="comedy">
+                    <img src="comedy4.jpg" alt="Comedy">
+                    Comedy
+                </label>
+            </div>
+            <div class="grid-item">
+                <input type="checkbox" id="drama" name="genre" value="Drama">
+                <label for="drama">
+                    <img src="drama1.jpg" alt="Drama">
+                    Drama
+                </label>
+            </div>
+            <div class="grid-item">
+                <input type="checkbox" id="fantasy" name="genre" value="Fantasy">
+                <label for="fantasy">
+                    <img src="fantasy1.jpg" alt="Fantasy">
+                    Fantasy
+                </label>
+            </div>
+            <div class="grid-item">
+                <input type="checkbox" id="horror" name="genre" value="Horror">
+                <label for="horror">
+                    <img src="horror1.jpg" alt="Horror">
+                    Horror
+                </label>
+            </div>
+            <div class="grid-item">
+                <input type="checkbox" id="mystery" name="genre" value="Mystery">
+                <label for="mystery">
+                    <img src="mystery1.jpg" alt="Mystery">
+                    Mystery
+                </label>
+            </div>
+            <div class="grid-item">
+                <input type="checkbox" id="romance" name="genre" value="Romance">
+                <label for="romance">
+                    <img src="romance1.jpg" alt="Romance">
+                    Romance
+                </label>
+            </div>
+            <div class="grid-item">
+                <input type="checkbox" id="sci-fi" name="genre" value="Sci-Fi">
+                <label for="sci-fi">
+                    <img src="scifi1.jpg" alt="Sci-Fi">
+                    Sci-Fi
+                </label>
+            </div>
+            <div class="grid-item">
+                <input type="checkbox" id="thriller" name="genre" value="Thriller">
+                <label for="thriller">
+                    <img src="thriller2.jpg" alt="Thriller">
+                    Thriller
+                </label>
+            </div>
+        </div>
+        <button onclick="submitGenres()">Submit</button>
+        <button onclick=" event.preventDefault(); 
+        window.location.href = 'movierec.html';">Next</button>
+    </div>
+
+    <div id="descriptionBox" class="description-box"></div>
+
+    <script>
+        function submitGenres() {
+            const checkboxes = document.querySelectorAll('input[name="genre"]:checked');
+            const selectedGenres = [];
+            checkboxes.forEach((checkbox) => {
+                selectedGenres.push(checkbox.value);
+            });
+
+            if (selectedGenres.length === 0) {
+                alert('Please select at least one genre.');
+                return;
+            }
+
+            let description = 'You are a person who enjoys ';
+            const genreDescriptions = {
+                'Action': 'high-energy and thrilling experiences',
+                'Comedy': 'a good laugh and light-hearted fun',
+                'Drama': 'emotional and thought-provoking stories',
+                'Fantasy': 'imaginative and fantastical worlds',
+                'Horror': 'spine-chilling and suspenseful moments',
+                'Mystery': 'solving puzzles and uncovering secrets',
+                'Romance': 'love stories and romantic escapades',
+                'Sci-Fi': 'futuristic and science-based adventures',
+                'Thriller': 'intense and edge-of-your-seat excitement'
+            };
+
+            const userGenres = selectedGenres.map(genre => genreDescriptions[genre]);
+
+            if (userGenres.length === 1) {
+                description += userGenres[0] + '.';
+            } else if (userGenres.length === 2) {
+                description += userGenres[0] + ' and ' + userGenres[1] + '.';
+            } else {
+                const lastGenre = userGenres.pop();
+                description += userGenres.join(', ') + ', and ' + lastGenre + '.';
+            }
+
+            const descriptionBox = document.getElementById('descriptionBox');
+            descriptionBox.innerHTML = description;
+            descriptionBox.style.display = 'block';
+        }
+    </script>
+   
+</body>
+</html>
